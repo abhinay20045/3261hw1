@@ -1,18 +1,32 @@
 const express = require('express');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // In-memory storage (in production, use a real database)
+let users = [
+  {
+    id: '1',
+    username: 'demo',
+    email: 'demo@example.com',
+    password: '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+    createdAt: new Date().toISOString()
+  }
+];
+
 let tasks = [
   {
     id: '1',
+    userId: '1',
     text: 'Welcome to Task Manager API!',
     completed: false,
     createdAt: new Date().toISOString(),
@@ -20,15 +34,172 @@ let tasks = [
   }
 ];
 
+let reviews = [
+  {
+    id: '1',
+    userId: '1',
+    taskId: '1',
+    rating: 5,
+    comment: 'Great task management app!',
+    createdAt: new Date().toISOString()
+  }
+];
+
+// Authentication middleware
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({
+      success: false,
+      error: 'Access token required'
+    });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({
+        success: false,
+        error: 'Invalid or expired token'
+      });
+    }
+    req.user = user;
+    next();
+  });
+};
+
 // Routes
 
-// GET /api/tasks - Get all tasks
-app.get('/api/tasks', (req, res) => {
+// Authentication Routes
+// POST /api/auth/register - Register a new user
+app.post('/api/auth/register', async (req, res) => {
   try {
+    const { username, email, password } = req.body;
+    
+    if (!username || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        error: 'Username, email, and password are required'
+      });
+    }
+
+    // Check if user already exists
+    const existingUser = users.find(u => u.email === email || u.username === username);
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        error: 'User already exists'
+      });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = {
+      id: Date.now().toString(),
+      username,
+      email,
+      password: hashedPassword,
+      createdAt: new Date().toISOString()
+    };
+
+    users.push(newUser);
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: newUser.id, username: newUser.username },
+      JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
+    res.status(201).json({
+      success: true,
+      data: {
+        user: {
+          id: newUser.id,
+          username: newUser.username,
+          email: newUser.email,
+          createdAt: newUser.createdAt
+        },
+        token
+      },
+      message: 'User registered successfully'
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Failed to register user'
+    });
+  }
+});
+
+// POST /api/auth/login - Login user
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        error: 'Email and password are required'
+      });
+    }
+
+    // Find user
+    const user = users.find(u => u.email === email);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        error: 'Invalid credentials'
+      });
+    }
+
+    // Check password
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
+      return res.status(401).json({
+        success: false,
+        error: 'Invalid credentials'
+      });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user.id, username: user.username },
+      JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
     res.json({
       success: true,
-      data: tasks,
-      count: tasks.length
+      data: {
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          createdAt: user.createdAt
+        },
+        token
+      },
+      message: 'Login successful'
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Failed to login'
+    });
+  }
+});
+
+// GET /api/tasks - Get user's tasks (protected)
+app.get('/api/tasks', authenticateToken, (req, res) => {
+  try {
+    const userTasks = tasks.filter(task => task.userId === req.user.userId);
+    res.json({
+      success: true,
+      data: userTasks,
+      count: userTasks.length
     });
   } catch (error) {
     res.status(500).json({
@@ -38,10 +209,10 @@ app.get('/api/tasks', (req, res) => {
   }
 });
 
-// GET /api/tasks/:id - Get a specific task
-app.get('/api/tasks/:id', (req, res) => {
+// GET /api/tasks/:id - Get a specific task (protected)
+app.get('/api/tasks/:id', authenticateToken, (req, res) => {
   try {
-    const task = tasks.find(t => t.id === req.params.id);
+    const task = tasks.find(t => t.id === req.params.id && t.userId === req.user.userId);
     if (!task) {
       return res.status(404).json({
         success: false,
@@ -60,8 +231,8 @@ app.get('/api/tasks/:id', (req, res) => {
   }
 });
 
-// POST /api/tasks - Create a new task
-app.post('/api/tasks', (req, res) => {
+// POST /api/tasks - Create a new task (protected)
+app.post('/api/tasks', authenticateToken, (req, res) => {
   try {
     const { text } = req.body;
     
@@ -74,6 +245,7 @@ app.post('/api/tasks', (req, res) => {
 
     const newTask = {
       id: Date.now().toString(),
+      userId: req.user.userId,
       text: text.trim(),
       completed: false,
       createdAt: new Date().toISOString(),
@@ -95,13 +267,13 @@ app.post('/api/tasks', (req, res) => {
   }
 });
 
-// PUT /api/tasks/:id - Update a task
-app.put('/api/tasks/:id', (req, res) => {
+// PUT /api/tasks/:id - Update a task (protected)
+app.put('/api/tasks/:id', authenticateToken, (req, res) => {
   try {
     const taskId = req.params.id;
     const { text, completed } = req.body;
     
-    const taskIndex = tasks.findIndex(t => t.id === taskId);
+    const taskIndex = tasks.findIndex(t => t.id === taskId && t.userId === req.user.userId);
     if (taskIndex === -1) {
       return res.status(404).json({
         success: false,
@@ -139,11 +311,11 @@ app.put('/api/tasks/:id', (req, res) => {
   }
 });
 
-// DELETE /api/tasks/:id - Delete a task
-app.delete('/api/tasks/:id', (req, res) => {
+// DELETE /api/tasks/:id - Delete a task (protected)
+app.delete('/api/tasks/:id', authenticateToken, (req, res) => {
   try {
     const taskId = req.params.id;
-    const taskIndex = tasks.findIndex(t => t.id === taskId);
+    const taskIndex = tasks.findIndex(t => t.id === taskId && t.userId === req.user.userId);
     
     if (taskIndex === -1) {
       return res.status(404).json({
@@ -167,11 +339,12 @@ app.delete('/api/tasks/:id', (req, res) => {
   }
 });
 
-// DELETE /api/tasks - Delete all tasks
-app.delete('/api/tasks', (req, res) => {
+// DELETE /api/tasks - Delete all user's tasks (protected)
+app.delete('/api/tasks', authenticateToken, (req, res) => {
   try {
-    const deletedCount = tasks.length;
-    tasks = [];
+    const userTasks = tasks.filter(task => task.userId === req.user.userId);
+    const deletedCount = userTasks.length;
+    tasks = tasks.filter(task => task.userId !== req.user.userId);
     
     res.json({
       success: true,
@@ -181,6 +354,78 @@ app.delete('/api/tasks', (req, res) => {
     res.status(500).json({
       success: false,
       error: 'Failed to delete all tasks'
+    });
+  }
+});
+
+// Reviews Routes
+// GET /api/reviews - Get all reviews for a task
+app.get('/api/reviews/:taskId', (req, res) => {
+  try {
+    const taskReviews = reviews.filter(review => review.taskId === req.params.taskId);
+    res.json({
+      success: true,
+      data: taskReviews,
+      count: taskReviews.length
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch reviews'
+    });
+  }
+});
+
+// POST /api/reviews - Create a new review (protected)
+app.post('/api/reviews', authenticateToken, (req, res) => {
+  try {
+    const { taskId, rating, comment } = req.body;
+    
+    if (!taskId || !rating || rating < 1 || rating > 5) {
+      return res.status(400).json({
+        success: false,
+        error: 'Task ID and rating (1-5) are required'
+      });
+    }
+
+    // Check if task exists and belongs to user
+    const task = tasks.find(t => t.id === taskId && t.userId === req.user.userId);
+    if (!task) {
+      return res.status(404).json({
+        success: false,
+        error: 'Task not found'
+      });
+    }
+
+    // Check if user already reviewed this task
+    const existingReview = reviews.find(r => r.taskId === taskId && r.userId === req.user.userId);
+    if (existingReview) {
+      return res.status(400).json({
+        success: false,
+        error: 'You have already reviewed this task'
+      });
+    }
+
+    const newReview = {
+      id: Date.now().toString(),
+      userId: req.user.userId,
+      taskId,
+      rating: parseInt(rating),
+      comment: comment || '',
+      createdAt: new Date().toISOString()
+    };
+
+    reviews.push(newReview);
+    
+    res.status(201).json({
+      success: true,
+      data: newReview,
+      message: 'Review created successfully'
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Failed to create review'
     });
   }
 });
@@ -198,16 +443,33 @@ app.get('/api/health', (req, res) => {
 // GET / - Root endpoint
 app.get('/', (req, res) => {
   res.json({
-    message: 'Task Manager API',
-    version: '1.0.0',
+    message: 'Task Manager API with Authentication',
+    version: '2.0.0',
     endpoints: {
-      'GET /api/tasks': 'Get all tasks',
-      'GET /api/tasks/:id': 'Get a specific task',
-      'POST /api/tasks': 'Create a new task',
-      'PUT /api/tasks/:id': 'Update a task',
-      'DELETE /api/tasks/:id': 'Delete a task',
-      'DELETE /api/tasks': 'Delete all tasks',
-      'GET /api/health': 'Health check'
+      authentication: {
+        'POST /api/auth/register': 'Register a new user',
+        'POST /api/auth/login': 'Login user'
+      },
+      tasks: {
+        'GET /api/tasks': 'Get user tasks (protected)',
+        'GET /api/tasks/:id': 'Get a specific task (protected)',
+        'POST /api/tasks': 'Create a new task (protected)',
+        'PUT /api/tasks/:id': 'Update a task (protected)',
+        'DELETE /api/tasks/:id': 'Delete a task (protected)',
+        'DELETE /api/tasks': 'Delete all user tasks (protected)'
+      },
+      reviews: {
+        'GET /api/reviews/:taskId': 'Get reviews for a task',
+        'POST /api/reviews': 'Create a review (protected)'
+      },
+      system: {
+        'GET /api/health': 'Health check'
+      }
+    },
+    demo: {
+      username: 'demo',
+      email: 'demo@example.com',
+      password: 'password'
     }
   });
 });

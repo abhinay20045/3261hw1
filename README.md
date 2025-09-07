@@ -4,7 +4,7 @@ This repository contains a React Native mobile application built with Expo, demo
 
 ## 📱 Project Overview
 
-**Task Manager Mobile App** - A fully functional task management application with the following features:
+**Task Manager Mobile App** - A simple and functional task management application with the following features:
 
 ### Features
 - ✅ **User Input**: Text input for adding new tasks
@@ -14,6 +14,7 @@ This repository contains a React Native mobile application built with Expo, demo
 - ✅ **Cross-Platform**: Works on both iOS and Android
 - ✅ **Modern UI**: Clean, responsive design with proper styling
 - ✅ **Task Management**: Complete CRUD operations for tasks
+- ✅ **RESTful API**: Backend server for data synchronization
 
 ### User Interactions
 1. **Text Input**: Users can type task descriptions

@@ -1,10 +1,8 @@
 {
   "expo": {
-    "name": "Task Manager",
-    "slug": "task-manager-pro",
-    "displayName": "Task Manager",
+    "name": "MobileApp",
+    "slug": "MobileApp",
     "version": "1.0.0",
-    "description": "Advanced task management with location, weather, and notifications",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

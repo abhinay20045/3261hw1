@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "Task Manager Pro",
+    "name": "Task Manager",
     "slug": "task-manager-pro",
+    "displayName": "Task Manager",
     "version": "1.0.0",
     "description": "Advanced task management with location, weather, and notifications",
     "orientation": "portrait",

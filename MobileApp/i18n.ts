@@ -19,6 +19,12 @@ const translations = {
     'language.english': 'English',
     'language.spanish': 'Español',
     'language.french': 'Français',
+    'reminderOptions.fiveMinutes': '5 minutes',
+    'reminderOptions.tenMinutes': '10 minutes',
+    'reminderOptions.thirtyMinutes': '30 minutes',
+    'reminderOptions.oneHour': '1 hour',
+    'reminderOptions.twoHours': '2 hours',
+    'reminderOptions.oneDay': '1 day',
   },
   es: {
     'app.title': 'Gestor de Tareas',
@@ -37,6 +43,12 @@ const translations = {
     'language.english': 'English',
     'language.spanish': 'Español',
     'language.french': 'Français',
+    'reminderOptions.fiveMinutes': '5 minutos',
+    'reminderOptions.tenMinutes': '10 minutos',
+    'reminderOptions.thirtyMinutes': '30 minutos',
+    'reminderOptions.oneHour': '1 hora',
+    'reminderOptions.twoHours': '2 horas',
+    'reminderOptions.oneDay': '1 día',
   },
   fr: {
     'app.title': 'Gestionnaire de Tâches',
@@ -55,6 +67,12 @@ const translations = {
     'language.english': 'English',
     'language.spanish': 'Español',
     'language.french': 'Français',
+    'reminderOptions.fiveMinutes': '5 minutes',
+    'reminderOptions.tenMinutes': '10 minutes',
+    'reminderOptions.thirtyMinutes': '30 minutes',
+    'reminderOptions.oneHour': '1 heure',
+    'reminderOptions.twoHours': '2 heures',
+    'reminderOptions.oneDay': '1 jour',
   },
 };
 

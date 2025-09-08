@@ -1,4 +1,5 @@
 import * as Notifications from 'expo-notifications';
+import { SchedulableTriggerInputTypes } from 'expo-notifications';
 
 // Configure notification behavior
 Notifications.setNotificationHandler({
@@ -6,6 +7,8 @@ Notifications.setNotificationHandler({
     shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
   }),
 });
 
@@ -26,6 +29,7 @@ export const scheduleReminder = async (taskText: string, delayMinutes: number = 
         sound: 'default',
       },
       trigger: {
+        type: SchedulableTriggerInputTypes.TIME_INTERVAL,
         seconds: delayMinutes * 60, // Convert minutes to seconds
       },
     });

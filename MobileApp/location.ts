@@ -1,8 +1,8 @@
 import * as Location from 'expo-location';
 
 export interface LocationData {
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lon: number;
   address?: string;
 }
 
@@ -25,8 +25,8 @@ export const requestAndGetLocation = async (): Promise<LocationData | null> => {
     });
 
     return {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
+      lat: location.coords.latitude,
+      lon: location.coords.longitude,
       address: address[0] ? `${address[0].city}, ${address[0].region}` : 'Unknown location'
     };
   } catch (error) {

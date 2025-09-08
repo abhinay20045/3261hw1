@@ -280,7 +280,7 @@ export default function App() {
       >
         <View style={styles.header}>
           <View style={styles.headerTop}>
-            <Text style={styles.title}>{t('title')}</Text>
+            <Text style={styles.title}>{t('Task Manager')}</Text>
             <TouchableOpacity style={styles.languageToggle} onPress={toggleLanguage}>
               <Text style={styles.languageToggleText}>
                 {currentLanguage === 'en' ? 'ES' : 'EN'}

@@ -10,6 +10,12 @@ const App: React.FC = () => {
       >
         Click Me
       </button>
+      <button 
+        onClick={() => alert('New Button Clicked!')} 
+        style={{ padding: '10px 20px', backgroundColor: '#28A745', color: '#FFFFFF', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '10px' }}
+      >
+        New Button
+      </button>
     </div>
   );
 };

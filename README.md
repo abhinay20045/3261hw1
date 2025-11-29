@@ -131,6 +131,10 @@ To use the Task Manager Mobile App, follow these steps after setting up the proj
 5. Delete individual tasks using the "Delete" button.
 6. Clear all tasks at once with the "Clear All" button.
 
+### Additional Notes
+- Ensure your device is connected to the same network as your development machine for the best experience.
+- For any issues, refer to the Expo documentation or the React Native community forums for support.
+
 ---
 
 **Course**: CS 3261 - Mobile Development  

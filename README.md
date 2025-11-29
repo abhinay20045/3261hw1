@@ -121,6 +121,16 @@ npx expo start --web
 - **@react-navigation/stack**: ^6.0.0
 - **@react-native-async-storage/async-storage**: ^1.15.0
 
+## 📄 Usage Instructions
+To use the Task Manager Mobile App, follow these steps after setting up the project:
+
+1. Launch the app on your device or simulator.
+2. Use the text input to enter a task description.
+3. Click the "Add" button to create a new task.
+4. Mark tasks as complete by tapping the checkbox.
+5. Delete individual tasks using the "Delete" button.
+6. Clear all tasks at once with the "Clear All" button.
+
 ---
 
 **Course**: CS 3261 - Mobile Development  

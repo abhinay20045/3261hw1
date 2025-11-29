@@ -123,3 +123,7 @@ npx expo start --web
 ## 📄 Documentation
 
 This README file serves as the essential documentation for the project, providing an overview, setup instructions, and technical details necessary for developers and users to understand and work with the Task Manager Mobile App effectively.
+
+## 📜 Project Description
+
+The Task Manager Mobile App is designed to help users efficiently manage their tasks. It allows users to create, update, and delete tasks seamlessly, ensuring that they can keep track of their responsibilities. With a user-friendly interface and robust functionality, this app aims to enhance productivity and organization for users on both iOS and Android platforms.

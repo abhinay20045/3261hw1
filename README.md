@@ -130,6 +130,17 @@ npx expo start --web
 
 This README provides essential information for developers and users to understand and work with the Task Manager Mobile App. It includes project overview, features, development environment setup, and technical implementation details to facilitate contributions and usage.
 
+## 📖 Usage
+
+To use the Task Manager Mobile App, follow these steps:
+
+1. Launch the app on your device or simulator.
+2. Use the text input field to enter a task description.
+3. Click the "Add" button to add the task to your list.
+4. Mark tasks as complete by tapping the checkbox next to them.
+5. To delete a task, tap the "Delete" button next to the task.
+6. Use the "Clear All" button to remove all tasks from the list.
+
 ---
 
 **Course**: CS 3261 - Mobile Development  

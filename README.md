@@ -140,3 +140,14 @@ To use the Task Manager Mobile App, follow these steps after setting up the proj
 **Course**: CS 3261 - Mobile Development  
 **Assignment**: Development Environment Setup and Sample Application  
 **Platform**: React Native with Expo  
+
+## 📖 Contribution Guidelines
+We welcome contributions to improve the Task Manager Mobile App. Please follow these guidelines:
+
+1. **Fork the repository**: Create your own copy of the project.
+2. **Create a feature branch**: Use descriptive names for branches (e.g., `feature/add-dark-mode`).
+3. **Make your changes**: Ensure code quality and follow the existing style.
+4. **Submit a pull request**: Describe your changes and why they should be merged.
+5. **Respect the code of conduct**: Be kind and respectful to all contributors.
+
+Thank you for your interest in contributing!

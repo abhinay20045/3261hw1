@@ -151,3 +151,6 @@ We welcome contributions to improve the Task Manager Mobile App. Please follow t
 5. **Respect the code of conduct**: Be kind and respectful to all contributors.
 
 Thank you for your interest in contributing!
+
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

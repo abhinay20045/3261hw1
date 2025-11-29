@@ -114,6 +114,13 @@ npx expo start --web
 - Touch gestures for task completion
 - Alert dialogs for confirmations
 
+## 📦 Dependencies
+- **react**: ^17.0.1
+- **react-native**: ^0.64.0
+- **@react-navigation/native**: ^6.0.0
+- **@react-navigation/stack**: ^6.0.0
+- **@react-native-async-storage/async-storage**: ^1.15.0
+
 ---
 
 **Course**: CS 3261 - Mobile Development  

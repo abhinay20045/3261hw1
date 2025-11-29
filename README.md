@@ -127,3 +127,13 @@ This README file serves as the essential documentation for the project, providin
 ## 📜 Project Description
 
 The Task Manager Mobile App is designed to help users efficiently manage their tasks. It allows users to create, update, and delete tasks seamlessly, ensuring that they can keep track of their responsibilities. With a user-friendly interface and robust functionality, this app aims to enhance productivity and organization for users on both iOS and Android platforms.
+
+## 📥 Installation Instructions
+
+To set up the project locally, follow these steps:
+
+1. Ensure you have the prerequisites installed as mentioned above.
+2. Clone the repository using the command provided in the Installation & Setup section.
+3. Navigate into the `MobileApp` directory.
+4. Install the necessary dependencies with `npm install`.
+5. Start the development server using `npx expo start`.

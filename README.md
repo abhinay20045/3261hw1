@@ -137,3 +137,32 @@ To set up the project locally, follow these steps:
 3. Navigate into the `MobileApp` directory.
 4. Install the necessary dependencies with `npm install`.
 5. Start the development server using `npx expo start`.
+
+## 📚 Usage Examples
+
+Here are some examples of how to use the Task Manager Mobile App:
+
+### Adding a Task
+```javascript
+const addTask = (taskDescription) => {
+    if (taskDescription.trim()) {
+        // Code to add task
+    } else {
+        // Show error alert
+    }
+};
+```
+
+### Deleting a Task
+```javascript
+const deleteTask = (taskId) => {
+    // Code to delete task by ID
+};
+```
+
+### Marking a Task as Complete
+```javascript
+const toggleTaskCompletion = (taskId) => {
+    // Code to toggle task completion status
+};
+```

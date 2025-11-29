@@ -114,6 +114,10 @@ npx expo start --web
 - Touch gestures for task completion
 - Alert dialogs for confirmations
 
+## 📚 Documentation
+
+This README provides essential information for developers and users to understand and work with the Task Manager Mobile App. It includes project overview, features, development environment setup, and technical implementation details to facilitate contributions and usage.
+
 ---
 
 **Course**: CS 3261 - Mobile Development  

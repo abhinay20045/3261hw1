@@ -159,3 +159,11 @@ Thank you for considering contributing to our project!
 **Course**: CS 3261 - Mobile Development  
 **Assignment**: Development Environment Setup and Sample Application  
 **Platform**: React Native with Expo  
+
+## 📑 Additional Resources
+
+For further information and resources, consider the following links:
+
+- [React Native Documentation](https://reactnative.dev/docs/getting-started)
+- [Expo Documentation](https://docs.expo.dev/)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)

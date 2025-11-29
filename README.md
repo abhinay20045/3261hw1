@@ -49,21 +49,29 @@ The Task Manager Mobile App is designed to help users efficiently manage their d
 - Expo CLI (`npm install -g @expo/cli`)
 - Expo Go app on your mobile device
 
-### Installation & Setup
-```bash
-# Clone the repository
-git clone <repository-url>
-cd 3261hw1
+### Installation Instructions
+To set up the project, follow these steps:
 
-# Navigate to mobile app
-cd MobileApp
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd 3261hw1
+   ```
 
-# Install dependencies
-npm install
+2. Navigate to the mobile app directory:
+   ```bash
+   cd MobileApp
+   ```
 
-# Start the development server
-npx expo start
-```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+   ```bash
+   npx expo start
+   ```
 
 ### Running on Physical Device
 1. Install **Expo Go** app on your iOS/Android device

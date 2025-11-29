@@ -114,8 +114,43 @@ npx expo start --web
 - Touch gestures for task completion
 - Alert dialogs for confirmations
 
+## 📦 Dependencies
+- **react**: ^17.0.1
+- **react-native**: ^0.64.0
+- **@react-navigation/native**: ^6.0.0
+- **@react-navigation/stack**: ^6.0.0
+- **@react-native-async-storage/async-storage**: ^1.15.0
+
+## 📄 Usage Instructions
+To use the Task Manager Mobile App, follow these steps after setting up the project:
+
+1. Launch the app on your device or simulator.
+2. Use the text input to enter a task description.
+3. Click the "Add" button to create a new task.
+4. Mark tasks as complete by tapping the checkbox.
+5. Delete individual tasks using the "Delete" button.
+6. Clear all tasks at once with the "Clear All" button.
+
+### Additional Notes
+- Ensure your device is connected to the same network as your development machine for the best experience.
+- For any issues, refer to the Expo documentation or the React Native community forums for support.
+
 ---
 
 **Course**: CS 3261 - Mobile Development  
 **Assignment**: Development Environment Setup and Sample Application  
 **Platform**: React Native with Expo  
+
+## 📖 Contribution Guidelines
+We welcome contributions to improve the Task Manager Mobile App. Please follow these guidelines:
+
+1. **Fork the repository**: Create your own copy of the project.
+2. **Create a feature branch**: Use descriptive names for branches (e.g., `feature/add-dark-mode`).
+3. **Make your changes**: Ensure code quality and follow the existing style.
+4. **Submit a pull request**: Describe your changes and why they should be merged.
+5. **Respect the code of conduct**: Be kind and respectful to all contributors.
+
+Thank you for your interest in contributing!
+
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

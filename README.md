@@ -119,3 +119,7 @@ npx expo start --web
 **Course**: CS 3261 - Mobile Development  
 **Assignment**: Development Environment Setup and Sample Application  
 **Platform**: React Native with Expo  
+
+## 📄 Documentation
+
+This README file serves as the essential documentation for the project, providing an overview, setup instructions, and technical details necessary for developers and users to understand and work with the Task Manager Mobile App effectively.

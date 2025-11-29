@@ -24,6 +24,10 @@ This repository contains a React Native mobile application built with Expo, demo
 5. **Clear All Button**: Remove all tasks at once
 6. **Form Validation**: Prevents empty task submissions
 
+## 📄 Project Description
+
+The Task Manager Mobile App is designed to help users efficiently manage their daily tasks. It provides a user-friendly interface for adding, deleting, and organizing tasks, ensuring that users can keep track of their responsibilities with ease. The app leverages local storage for data persistence, allowing users to access their tasks even when offline. With its cross-platform capabilities, the app is accessible on both iOS and Android devices, making task management seamless and convenient for everyone.
+
 ## 🛠️ Development Environment
 
 ### Installed Tools

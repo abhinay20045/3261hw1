@@ -141,6 +141,19 @@ To use the Task Manager Mobile App, follow these steps:
 5. To delete a task, tap the "Delete" button next to the task.
 6. Use the "Clear All" button to remove all tasks from the list.
 
+## 🤝 Contribution Guidelines
+
+We welcome contributions to the Task Manager Mobile App! To contribute, please follow these guidelines:
+
+1. **Fork the Repository**: Create your own copy of the repository by forking it.
+2. **Create a Branch**: Use a descriptive name for your branch (e.g., `feature/add-new-feature`).
+3. **Make Changes**: Implement your changes and ensure they are well-tested.
+4. **Commit Your Changes**: Write clear and concise commit messages.
+5. **Push to Your Branch**: Push your changes to your forked repository.
+6. **Open a Pull Request**: Submit a pull request to the main repository for review.
+
+Thank you for considering contributing to our project!
+
 ---
 
 **Course**: CS 3261 - Mobile Development  
